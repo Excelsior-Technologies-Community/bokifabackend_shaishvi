@@ -136,7 +136,7 @@ const forgotPassword = async (req, res) => {
     await user.save();
 
     // Reset URL
-    const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetUrl = `http://localhost:5000/api/auth/reset-password/${resetToken}`;
 
     // Send Email
     await sendEmail({
