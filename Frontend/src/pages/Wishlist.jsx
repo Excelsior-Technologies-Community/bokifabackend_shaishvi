@@ -30,10 +30,10 @@ const Wishlist = () => {
             <div className="">
               {wishlist.map((item) => (
                 <div
-                  key={item.id}
+                  key={item._id}
                   className="border rounded-sm p-3 flex  gap-5  justify-between items-center "
                 >
-                  <img src={item.img} alt={item.name} className="w-50 h-50" />
+                  <img src={`http://localhost:5000${item.image}`} alt={item.title} className="w-50 h-50" />
                   <p className="text-xl ">{item.title}</p>
                   <h2 className="text-lg font-bold">{item.name}</h2>
                   <p className="text-xl font-bold">${item.price.toFixed(2)}</p>

@@ -12,8 +12,6 @@ app.use(
         credentials: true,
     })
 );
-
-
 app.use(express.json());
 const authRoutes = require("./routes/authRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");

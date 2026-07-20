@@ -1,6 +1,43 @@
 import { Link } from "react-router-dom";
+import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
+
+ 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/register", formData);
+      console.log(response.data);
+      navigate("/login");
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-linear-to-r from-slate-900 via-blue-900 to-indigo-700 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
@@ -10,7 +47,7 @@ const Register = () => {
           Register to get started
         </p>
 
-        <form className="space-y-1">
+        <form className="space-y-1" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* First Name */}
             <div>
@@ -21,6 +58,9 @@ const Register = () => {
                 type="text"
                 placeholder="First Name"
                 className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
               />
             </div>
 
@@ -33,6 +73,9 @@ const Register = () => {
                 type="text"
                 placeholder="Last Name"
                 className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                name='lastName'
+                value={formData.lastName}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -43,6 +86,9 @@ const Register = () => {
               type="email"
               placeholder="Enter your email"
               className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
 
@@ -52,6 +98,9 @@ const Register = () => {
               type="password"
               placeholder="Enter password"
               className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
             />
           </div>
 
@@ -63,6 +112,9 @@ const Register = () => {
               type="password"
               placeholder="Confirm password"
               className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
             />
           </div>
 

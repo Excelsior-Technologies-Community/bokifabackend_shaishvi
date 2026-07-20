@@ -8,6 +8,7 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Book  from "./pages/Book";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/category/:id" element={<Book />} />
         
       </Routes>
       <Footer />

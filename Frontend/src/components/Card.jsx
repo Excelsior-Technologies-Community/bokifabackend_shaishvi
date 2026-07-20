@@ -1,5 +1,7 @@
 import React from "react";
-import { homeData } from "../data/homeData";
+import { useEffect, useState } from "react";
+import API from "../services/api";
+
 import { FaRegHeart } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -11,6 +13,20 @@ import "swiper/css/navigation";
 const Card = () => {
   const { Togglewishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
+  const [books, setBooks] = useState([]);
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+  const fetchBooks = async () => {
+    try {
+      const response = await API.get("/books");
+      console.log(response.data);
+      setBooks(response.data.books);
+    } catch (error) {
+      console.error("Error fetching books:", error);
+    }
+  };
+
   return (
     <>
       <section className="w-full py-5 ">
@@ -21,19 +37,21 @@ const Card = () => {
           </button>
         </div>
         <div className="max-w-8xl mx-auto  hidden lg:grid grid-cols-6 gap-5 p-5">
-          {homeData.map((item) => (
+          {books.map((item) => (
+              <>
+             
             <div
-              key={item.id}
+              key={item._id}
               className="flex flex-col h-full rounded-lg overflow-hidden bg-white shadow-sm  hover:shadow-lg transition-shadow duration-300 group "
             >
               <div className="w-full h-70 flex items-center justify-center relative group rounded-md overflow-hidden">
                 <img
-                  src={item.img}
+                  src={`http://localhost:5000${item.image}`}
                   alt=""
                   className="w-full h-full  object-contain"
                 />
                 <button
-                  className={`absolute top-2 right-2 p-1.5 bg-white rounded-full shadow-sm text-gray-400 hover:text-red-500 ${isInWishlist(item.id) ? "text-red-500" : "text-black hover:text-red-500"}`}
+                  className={`absolute top-2 right-2 p-1.5 bg-white rounded-full shadow-sm text-gray-400 hover:text-red-500 ${isInWishlist(item._id) ? "text-red-500" : "text-black hover:text-red-500"}`}
                   onClick={() => Togglewishlist(item)}
                 >
                   <FaRegHeart />
@@ -55,6 +73,7 @@ const Card = () => {
                 </button>
               </div>
             </div>
+             </>
           ))}
         </div>
       </section>
@@ -73,13 +92,13 @@ const Card = () => {
             },
           }}
         >
-          {homeData.map((item) => (
-            <SwiperSlide key={item.id} className="h-auto flex">
+          {books.map((item) => (
+            <SwiperSlide key={item._id} className="h-auto flex">
               {/* Main Card Container */}
               <div className="flex flex-col w-full h-full rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-lg transition-shadow duration-300 ">
                 <div className="relative h-170 md:h-120 flex items-center justify-center bg-gray-100 overflow-hidden">
                   <img
-                    src={`https:${item.img}`}
+                    src={`http://localhost:5000/uploads/${item.image}`}
                     alt={item.title}
                     className="w-full h-full object-cover"
                   />

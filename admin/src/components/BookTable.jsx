@@ -65,17 +65,17 @@ const BookTable = ({ books, setBooks }) => {
 
                 <td>{book.category?.name}</td>
 
-                <td className="space-x-2">
+                <td className="space-x-2 flex  p-4 justify-center items-center">
                   <Link
                     to={`/books/edit/${book._id}`}
-                    className="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700"
+                    className="bg-green-600 text-white px-2 py-2 rounded hover:bg-green-700"
                   >
                     Edit
                   </Link>
 
                   <button
                     onClick={() => handleDelete(book._id)}
-                    className="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700"
+                    className="bg-red-600 text-white px-2 py-2 rounded hover:bg-red-700"
                   >
                     Delete
                   </button>
