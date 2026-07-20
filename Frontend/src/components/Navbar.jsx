@@ -3,8 +3,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaSearch, FaRegHeart, FaShoppingBag, FaUser } from "react-icons/fa";
 import { FaAngleLeft, FaAngleRight, FaBars } from "react-icons/fa6";
+import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
+  const { wishlist } = useWishlist();
+  const { cartCount } = useCart();
   return (
     <>
       <section className="w-full bg-[rgba(9,51,26)]  py-3">
@@ -64,17 +68,22 @@ const Navbar = () => {
             </select>
             <Link className="flex items-center" to="/wishlist">
               <FaRegHeart className="font-bold text-2xl" />
-              <span>(0)</span>
+              <span className="text-sm text-black  rounded-full h-4 w-4 flex items-center justify-center">
+                ({wishlist ? wishlist.length : 0})
+              </span>
             </Link>
 
             <div className="relative group">
               <FaUser className="text-2xl" />
-              <div className="bg-[#ffffff] border rounded-sm h-36 w-30 absolute top-6 right-0 p-2 hidden  group-hover:block ">
+              <div className="bg-[#ffffff] border rounded-sm h-36 w-30 absolute top-6 right-0 p-2 hidden z-20 overflow-visible  group-hover:block ">
                 <ul className="space-y-1">
                   <Link to="/login">
                     <li>Login</li>
                   </Link>
-                  <li>Register</li>
+                  <Link to="/register">
+                    {" "}
+                    <li>Register</li>
+                  </Link>
                   <li>My Account</li>
                   <Link to="/wishlist">
                     <li>Wishlist</li>
@@ -85,6 +94,7 @@ const Navbar = () => {
             </div>
             <Link className="flex items-center" to="/cart">
               <FaShoppingBag className="text-2xl" />
+              <span>({cartCount})</span>
             </Link>
           </div>
         </div>

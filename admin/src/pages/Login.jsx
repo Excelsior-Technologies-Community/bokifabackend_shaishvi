@@ -27,18 +27,15 @@ function Login({}) {
           },
         },
       );
-
       console.log("Backend response received:", response.data);
-
+      
+      if (response.data.user.role !== "admin") {
+        alert("Access denied! Please login with admin credentials");
+        return;
+      }
       localStorage.setItem("bearerToken", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-
-      if (response.data.user.role === "admin") {
-        alert("please login with user credentials");
-        return;
-      } else {
-        navigate("/");
-      }
+      navigate("/dashboard");
     } catch (error) {
       console.error("Axios Error Details:", error.response || error);
       alert(
@@ -48,7 +45,7 @@ function Login({}) {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-r from-slate-900 via-blue-900 to-indigo-700 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-700 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
         {forgotPassword ? (
           <>
@@ -137,16 +134,6 @@ function Login({}) {
                 Login
               </button>
             </form>
-
-            <p className="text-center mt-6 text-gray-600">
-              Don't have an account?{" "}
-              <Link
-                to="/register"
-                className="text-blue-700 font-semibold hover:underline"
-              >
-                Register
-              </Link>
-            </p>
           </>
         )}
       </div>

@@ -3,7 +3,17 @@ const Book = require("../models/bookModel");
 // Create Book
 const createBook = async (req, res) => {
   try {
-    const book = await Book.create(req.body);
+    const book = await Book.create({
+      title: req.body.title,
+      author: req.body.author,
+      price: req.body.price,
+      description: req.body.description,
+      stock: req.body.stock,
+      category: req.body.category,
+      image: req.file
+        ? `/uploads/${req.file.filename}`
+        : "",
+    });
 
     res.status(201).json({
       success: true,

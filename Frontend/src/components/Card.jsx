@@ -3,11 +3,14 @@ import { homeData } from "../data/homeData";
 import { FaRegHeart } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-
+import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
 import "swiper/css";
 import "swiper/css/navigation";
 
 const Card = () => {
+  const { Togglewishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
   return (
     <>
       <section className="w-full py-5 ">
@@ -29,7 +32,10 @@ const Card = () => {
                   alt=""
                   className="w-full h-full  object-contain"
                 />
-                <button className="absolute top-2 right-2 p-1.5 bg-white rounded-full shadow-sm text-gray-400 hover:text-red-500">
+                <button
+                  className={`absolute top-2 right-2 p-1.5 bg-white rounded-full shadow-sm text-gray-400 hover:text-red-500 ${isInWishlist(item.id) ? "text-red-500" : "text-black hover:text-red-500"}`}
+                  onClick={() => Togglewishlist(item)}
+                >
                   <FaRegHeart />
                 </button>
               </div>
@@ -41,7 +47,10 @@ const Card = () => {
                 <span className="text-lg font-bold  text-[#027a36]">
                   ${item.price.toFixed(2)}
                 </span>
-                <button className=" group-hover:block hidden w-40 mx-2 my-2 bg-emerald-800 hover:bg-emerald-900 text-white font-medium py-2 px-4 rounded transition-colors duration-200 text-sm">
+                <button
+                  onClick={() => addToCart(item)}
+                  className=" group-hover:block hidden w-40 mx-2 my-2 bg-emerald-800 hover:bg-emerald-900 text-white font-medium py-2 px-4 rounded transition-colors duration-200 text-sm"
+                >
                   Add To Cart
                 </button>
               </div>
@@ -66,16 +75,12 @@ const Card = () => {
         >
           {homeData.map((item) => (
             <SwiperSlide key={item.id} className="h-auto flex">
-          
-
               {/* Main Card Container */}
               <div className="flex flex-col w-full h-full rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-lg transition-shadow duration-300 ">
-                
                 <div className="relative h-170 md:h-120 flex items-center justify-center bg-gray-100 overflow-hidden">
                   <img
                     src={`https:${item.img}`}
                     alt={item.title}
-                 
                     className="w-full h-full object-cover"
                   />
 
@@ -86,8 +91,6 @@ const Card = () => {
 
                 {/* Content Area */}
                 <div className="flex flex-col grow items-center mt-4 text-center p-4 pt-0">
-                 
-
                   <p className="text-3xl font-medium text-gray-800 line-clamp-2  px-2">
                     {item.title}
                   </p>
@@ -96,7 +99,6 @@ const Card = () => {
                     Ap Bokifa
                   </span>
 
-                  
                   <div className="mt-auto w-full flex flex-col items-center pt-2">
                     <span className="text-2xl font-bold text-[#027a36]">
                       ${item.price.toFixed(2)}
