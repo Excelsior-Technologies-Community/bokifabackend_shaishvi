@@ -21,7 +21,7 @@ const Navbar = () => {
         </div>
       </section>
       {/* second header */}
-      <section className="hidden lg:block w-full bg-[#ffffff] py-5 shadow-2xl">
+      <section className="hidden lg:block w-full bg-[#ffffff] py-5 shadow-2xl border-b border-gray-300">
         <div className="flex justify-between items-center max-w-8xl mx-5">
           <div>
             <img
@@ -136,6 +136,26 @@ const Navbar = () => {
             <Link className="flex items-center" to="/cart">
               <FaShoppingBag className="text-2xl" />
             </Link>
+          </div>
+        </div>
+      </section>
+      {/* menu section */}
+      <section className=" w-full bg-[#ffffff] py-5">
+        <div className="flex justify-between items-center max-w-8xl mx-5">
+          <div>
+            <ul className="flex items-center gap-5 text-xl">
+              <li className="hover:text-green-700 cursor-pointer">Home</li>
+              <li className="hover:text-green-700 cursor-pointer">Shop</li>
+              <li className="hover:text-green-700 cursor-pointer">About</li>
+              <li className="hover:text-green-700 cursor-pointer">Contact</li>
+              <li className="hover:text-green-700 cursor-pointer">Blog</li>
+            </ul>
+          </div>
+          <div className="flex gap-1 items-center">
+            <p>Need Help ?</p>
+            <p>
+              Call Us : <strong>+84 2500 88833</strong>
+            </p>
           </div>
         </div>
       </section>

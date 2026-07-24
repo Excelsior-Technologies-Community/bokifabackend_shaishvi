@@ -11,6 +11,9 @@ import Editbook from "./pages/Editbook";
 import Managecategory from "./pages/Managecategory";
 import Addcategory from "./pages/Addcategory";
 import Editcategory from "./pages/Editcategory";
+import User from "./pages/User";
+import Order from "./pages/Order";
+
 
 function App() {
   return (
@@ -31,6 +34,8 @@ function App() {
           <Route path="/categories" element={<Managecategory />} />
           <Route path="/categories/add" element={<Addcategory />} />
           <Route path="/categories/edit/:id" element={<Editcategory />} />
+          <Route path="/users" element={<User />} />
+          <Route path="/orders" element={<Order />} />
         </Route>
       </Routes>
     </>

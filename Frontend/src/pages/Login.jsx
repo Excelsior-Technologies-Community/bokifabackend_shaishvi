@@ -32,6 +32,7 @@ function Login({}) {
 
       localStorage.setItem("bearerToken", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
+      console.log(user._id);
 
       if (response.data.user.role === "admin") {
         alert("please login with user credentials");

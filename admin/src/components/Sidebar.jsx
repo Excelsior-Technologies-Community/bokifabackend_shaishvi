@@ -9,39 +9,30 @@ const Sidebar = () => {
       </div>
 
       <nav className="flex flex-col mt-5">
-        <NavLink
-          to="/dashboard"
-          className="px-6 py-3 hover:bg-slate-800"
-        >
+        <NavLink to="/dashboard" className="px-6 py-3 hover:bg-slate-800">
           Dashboard
         </NavLink>
 
-        <NavLink
-          to="/books"
-          className="px-6 py-3 hover:bg-slate-800"
-        >
+        <NavLink to="/books" className="px-6 py-3 hover:bg-slate-800">
           Manage Books
         </NavLink>
 
-        <NavLink
-          to="/books/add"
-          className="px-6 py-3 hover:bg-slate-800"
-        >
+        <NavLink to="/books/add" className="px-6 py-3 hover:bg-slate-800">
           Add Book
         </NavLink>
 
-        <NavLink
-          to="/categories"
-          className="px-6 py-3 hover:bg-slate-800"
-        >
+        <NavLink to="/categories" className="px-6 py-3 hover:bg-slate-800">
           Manage Category
         </NavLink>
 
-        <NavLink
-          to="/categories/add"
-          className="px-6 py-3 hover:bg-slate-800"
-        >
+        <NavLink to="/categories/add" className="px-6 py-3 hover:bg-slate-800">
           Add Category
+        </NavLink>
+        <NavLink to="/users" className="px-6 py-3 hover:bg-slate-800">
+          Users
+        </NavLink>
+        <NavLink to="/orders" className="px-6 py-3 hover:bg-slate-800">
+          Orders
         </NavLink>
       </nav>
     </div>

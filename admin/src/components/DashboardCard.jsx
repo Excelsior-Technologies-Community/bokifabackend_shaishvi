@@ -10,7 +10,7 @@ const DashboardCard = ({ title, count }) => {
       <h2 className="text-3xl font-bold mt-3">
         {count}
       </h2>
-    </div>
+    </div> 
   );
 };
 
